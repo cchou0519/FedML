@@ -81,10 +81,35 @@ def load_partition_data_mnist_by_device_id(batch_size,
     return load_partition_data_mnist(batch_size, train_path, test_path)
 
 
-def load_partition_data_mnist(batch_size,
-                              train_path="./../../../data/MNIST_NCHC/train",
-                              test_path="./../../../data/MNIST_NCHC/test"):
-    users, groups, train_data, test_data = read_data(train_path, test_path)
+def load_partition_data_mnist(batch_size, client_num,
+                              data_path="./../../../data/mnist_data/"):
+    
+    data_path = data_path + client_num + 'Parties/'
+    
+    users = []
+    groups = []
+    train_data = {}
+    test_data = {}
+    for i in range(len(client_num)):
+        _data_path = data_path + 'party' + str(i+1) + '/data.npz'
+        
+        aa = np.load(_data_path)
+        
+        X_train = aa["x_train"].tolist()
+        X_test = aa["x_test"].tolist()
+        
+        Y_train = aa["y_train"].tolist()
+        Y_test = aa["y_test"].tolist()
+        
+        users.append('u_' + str(i))
+        
+        train_data['u_' + str(i)] = {}
+        train_data['u_' + str(i)]['y'] = Y_train
+        train_data['u_' + str(i)]['x'] = X_train
+        
+        test_data['u_' + str(i)] = {}
+        test_data['u_' + str(i)]['y'] = Y_test
+        test_data['u_' + str(i)]['x'] = X_test
 
     if len(groups) == 0:
         groups = [None for _ in users]
