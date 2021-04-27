@@ -43,7 +43,7 @@ def load_partition_data_mnist_by_device_id(batch_size,
 def load_partition_data_mnist(batch_size, client_num,
                               data_path="./../../../data/mnist_data/"):
     
-    data_path = data_path + client_num + 'Parties/'
+    data_path = data_path + str(client_num) + 'Parties/'
     
     users = []
     groups = []
