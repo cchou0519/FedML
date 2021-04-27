@@ -41,7 +41,7 @@ def load_partition_data_mnist_by_device_id(batch_size,
 
 
 def load_partition_data_mnist(batch_size, client_num,
-                              data_path="./../../../data/mnist_data/"):
+                              data_path="./../../../data/MNIST/mnist_data/"):
     
     data_path = data_path + str(client_num) + 'Parties/'
     
@@ -49,7 +49,7 @@ def load_partition_data_mnist(batch_size, client_num,
     groups = []
     train_data = {}
     test_data = {}
-    for i in range(len(client_num)):
+    for i in range(client_num):
         _data_path = data_path + 'party' + str(i+1) + '/data.npz'
         
         aa = np.load(_data_path)
