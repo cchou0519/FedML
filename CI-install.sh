@@ -41,7 +41,7 @@ pip install -r requirements.txt
 # install the dataset
 # 1. MNIST
 cd ./data/MNIST
-sh download_and_unzip.sh
+sh download_and_unzip_nchc.sh
 cd ../../
 
 # 2. FederatedEMNIST
