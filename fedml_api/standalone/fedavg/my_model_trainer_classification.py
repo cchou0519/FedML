@@ -1,6 +1,6 @@
 import torch
 from torch import nn
-
+from torch.autograd import Variable
 try:
     from fedml_core.trainer.model_trainer import ModelTrainer
 except ImportError:
@@ -33,6 +33,8 @@ class MyModelTrainer(ModelTrainer):
             batch_loss = []
             for batch_idx, (x, labels) in enumerate(train_data):
                 x, labels = x.to(device), labels.to(device)
+                x = Variable(data.view((-1, 1, 28, 28)))
+                labels = Variable(target)
                 # logging.info("x.size = " + str(x.size()))
                 # logging.info("labels.size = " + str(labels.size()))
                 model.zero_grad()
