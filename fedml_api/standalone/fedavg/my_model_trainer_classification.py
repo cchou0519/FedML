@@ -33,8 +33,8 @@ class MyModelTrainer(ModelTrainer):
             batch_loss = []
             for batch_idx, (x, labels) in enumerate(train_data):
                 x, labels = x.to(device), labels.to(device)
-                x = Variable(data.view((-1, 1, 28, 28)))
-                labels = Variable(target)
+                x = Variable(x.view((-1, 1, 28, 28)))
+                labels = Variable(labels)
                 # logging.info("x.size = " + str(x.size()))
                 # logging.info("labels.size = " + str(labels.size()))
                 model.zero_grad()
@@ -72,6 +72,8 @@ class MyModelTrainer(ModelTrainer):
             for batch_idx, (x, target) in enumerate(test_data):
                 x = x.to(device)
                 target = target.to(device)
+                x = Variable(x.view((-1, 1, 28, 28)))
+                target = Variable(target)
                 pred = model(x)
                 loss = criterion(pred, target)
 
