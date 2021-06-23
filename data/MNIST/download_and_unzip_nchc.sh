@@ -7,3 +7,5 @@ wget --save-cookies cookies.txt 'https://docs.google.com/uc?export=download&id='
 wget --load-cookies cookies.txt -O $filename \
      'https://docs.google.com/uc?export=download&id='$fileid'&confirm='$(<confirm.txt)
 unzip mnist_data.zip
+
+rm -rf mnist_data.zip
